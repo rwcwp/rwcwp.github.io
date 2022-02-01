@@ -6,18 +6,23 @@
 }
 
 body {
-    color: #ecdbfa;
-    background: #0b0014;
+    color: #d8d8d8;
+    background: #100016;
     font-family: "Montserrat", sans-serif;
+    padding: 0 128px;
 }
 
 .navbar {
-    padding: 0 64px;
-    width: calc(100% - 64px * 2);
+    border-bottom: #ff6600 4px solid;
+    box-shadow: 0 0 90px #ff660020;
+    top: 0;
+    left: 0;
+    padding: 0 128px;
+    width: calc(100% - 128px * 2);
     height: 56px;
     position: fixed;
     display: flex;
-    background: #0000004d;
+    background: #0000002f;
     align-items: center;
     justify-content: space-between;
 }
@@ -26,4 +31,101 @@ body {
     user-select: none;
     font-size: 20px;
     font-weight: bold;
+}
+
+.home {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.selfInfo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.selfInfoText {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.selfInfoName {
+    font-size: 44px;
+    font-weight: 800;
+}
+
+.selfInfoDescription {
+    font-size: 20px;
+    font-weight: 500;
+    opacity: .7;
+    width: 86%;
+}
+
+.selfInfoSkin {
+    width: 272px;
+}
+
+.spotifyCard {
+    margin-top: 24px;
+    border: #ff6600 3px solid;
+    box-shadow: 0 0 90px #ff660020;
+    position: relative;
+    width: 450px;
+    height: 124px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: row;
+    padding: 16px;
+    gap: 12px;
+}
+
+.songArtwork {
+    border-radius: 8px;
+    height: 100%;
+}
+
+.songInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    gap: 6px;
+}
+
+.songName {
+    font-size: 20px;
+    font-weight: 800;
+    cursor: pointer;
+    user-select: none;
+    transition: .5s;
+}
+
+.songName:hover {
+    text-decoration: underline;
+}
+
+.progressBar {
+    margin-top: 10px;
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    display: none;
+    background: #ff660050;
+}
+
+.progressBarFill {
+    transition: .5s;
+    width: 12%;
+    height: 100%;
+    border-radius: 2px;
+    box-shadow: 0 0 10px #ff660080;
+    background: #ff6600;
+}
+
+#ig:hover {
+    text-decoration: underline;
+    cursor: pointer;
 }

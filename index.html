@@ -15,5 +15,79 @@
         <div class="navbarGroup">
         </div>
     </div>
+    <div class="home">
+        <div class="selfInfo">
+            <div class="selfInfoText">
+                <span class="selfInfoName">Recep Aşlakcı</span>
+                <span class="selfInfoDescription">Selam! Ben Recep, 15 yaşındayım. Ankara Sincan'da yaşıyorum ve Selahattin Akbilek Anadolu Lisesinde 9. sınıf öğrencisiyim. 7 yıldır futbol ile ilgileniyorum. Basketbol & futbol oynamak, müzik dinlemek, film izlemek ve bilgisayar oyunu oynamak gibi hobilerim var</span>
+                <div class="spotifyCard">
+                    <img class="songArtwork" alt="artwork" id="artwork" src="avatar.png" alt="artwork">
+                    <div class="songInfo" id="songInfo">
+                        <span class="songName" id="song">Şarkı Çalınmıyor</span>
+                        <span class="songArtist" id="artist">Instagram: @_rwcwp2</span>
+                        <span class="songAlbum" id="album">Discord: _rwcwp_#1597</span>
+                        <!-- create a progress bar -->
+                        <div class="progressBar">
+                            <div class="progressBarFill" id="fill"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <img class="selfInfoSkin" alt="skin" src="https://r.namemc-static.com/skin/body.png?id=f7e541ba81dcc7c6&model=slim&theta=-14&phi=5&time=90&width=500&height=1500">
+        </div>
+    </div>
 </body>
 </html>
+<script>
+    let url = "https://lanyard.rest/v1/users/479632979954630656";
+    // fetch url and get artist, album and song name from spotify data
+    function spotifyCard() {
+        fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            if (data.data.spotify == null) {
+                document.querySelector(".progressBar").style.display = "none";
+                document.getElementById("artwork").src = "avatar.png";
+                document.getElementById("song").innerHTML = "Şarkı Çalınmıyor";
+                document.querySelector(".songArtist").onclick = function() {
+                    window.open("https://www.instagram.com/_rwcwp2/");
+                }
+                document.getElementById("artist").innerHTML = "Instagram: @_rwcwp2";
+                document.getElementById("artist").id = "ig";
+                document.getElementById("album").innerHTML = "Discord: _rwcwp_#1597";
+                return;
+            }
+            let artistEl = document.querySelector(".songArtist");
+            artistEl.id = "artist";
+            artistEl.onclick = null;
+            let artist = data.data.spotify.artist;
+            let album = data.data.spotify.album;
+            if (album.length > 18) {
+                album = album.trim().substring(0, 18) + "...";
+            }
+            let artwork = data.data.spotify.album_art_url;
+            let song = data.data.spotify.song;
+            if (song.length > 24) {
+                song = song.trim().substring(0, 24) + "...";
+            }
+            let start = data.data.spotify.timestamps.start;
+            let end = data.data.spotify.timestamps.end;
+            let duration = end - start;
+            let passed = Date.now() - start;
+            let percentage = passed / duration;
+            let track_id = data.data.spotify.track_id;
+            let track_url = "https://open.spotify.com/track/" + track_id;
+            document.getElementById("song").onclick = function() {
+                window.open(track_url);
+            }
+            document.getElementById("fill").style.width = percentage * 100 + "%";
+            document.getElementById("artwork").src = artwork;
+            artistEl.innerHTML = artist + " tarafından";
+            document.getElementById("album").innerHTML = album + " albümünde";
+            document.getElementById("song").innerHTML = song;
+            document.querySelector(".progressBar").style.display = "inline-block";
+        })
+    }
+    document.addEventListener("onload", spotifyCard)
+    setInterval(spotifyCard, 1000);
+</script>
